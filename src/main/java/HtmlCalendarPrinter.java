@@ -21,7 +21,7 @@ public class HtmlCalendarPrinter extends CalendarPrinter {
     @Override
     protected void printTitle(String name, int year) {
         output.printf("\t<h1> %s %d </h1>\n", name, year);
-        output.print("\t<table align=\"center\">\n");
+        output.print("\t<table align=\"center\">\n\t\t<tr>");
         CalendarColor color;
         for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) {
             if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
@@ -31,7 +31,7 @@ public class HtmlCalendarPrinter extends CalendarPrinter {
             output.print(String.format("\t\t\t<td style=\"%s\"> %s </td>\n",
                                                 color.htmlValue, SHORT_NAME_WEEK_DAY));
         }
-        output.print("\t<table align=\"center\">\n");
+        output.print("\t\t</tr>");
     }
 
     @Override

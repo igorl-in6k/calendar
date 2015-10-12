@@ -10,7 +10,7 @@ public abstract class CalendarPrinter {
     protected MonthTable currentMonth;
 
     public void print(MonthTable monthTable) {
-        today = new Day(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfWeek().getValue());
+        today = new Day(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfWeek().getValue(), 0);
         currentMonth = monthTable;
 
         setup();

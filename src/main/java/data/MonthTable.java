@@ -27,15 +27,15 @@ public class MonthTable {
         int weekDayOfFirstDayInMonth = LocalDate.of(year, month.getValue(), 1).getDayOfWeek().getValue();
 
         if ( weekDayOfFirstDayInMonth == 1 )
-            weeks[0] = new Week(1, 7);
+            weeks[0] = new Week(1, 7, 1);
         else {
             int firstWeekOffset = weekDayOfFirstDayInMonth - 2;
             int b = previousMonthLength - firstWeekOffset;
-            weeks[0] = new Week(b, previousMonthLength);
+            weeks[0] = new Week(b, previousMonthLength, 1);
         }
         int lastFilledDay = weeks[0].getDays()[6].getDayOfMonth();
         for (int i = 1; i < 6; i++) {
-            weeks[i] = new Week(lastFilledDay + 1, monthLength);
+            weeks[i] = new Week(lastFilledDay + 1, monthLength, i + 1);
             lastFilledDay = weeks[i].getDays()[6].getDayOfMonth();
         }
     }
@@ -53,15 +53,9 @@ public class MonthTable {
     }
 
     public boolean isInMonth(Day someDay) {
-        boolean isAnotherMonth = true;
-        for (Week week : weeks) {
-            for (Day day : week.getDays()) {
-                if ( day.getDayOfMonth() == 1 )
-                    isAnotherMonth = !isAnotherMonth;
-                if ( day.equalWith(someDay) )
-                    return !isAnotherMonth;
-            }
-        }
-        return false;
+        if ( (someDay.getDayOfMonth() > 25 && someDay.getWeekIndex() == 1) ||
+             (someDay.getDayOfMonth() < 15 && someDay.getWeekIndex() >= 5) )
+            return false;
+        return true;
     }
 }
