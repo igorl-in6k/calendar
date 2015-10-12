@@ -26,7 +26,7 @@ public abstract class CalendarPrinter {
     }
 
     public void print() {
-        print(new MonthTable(LocalDate.now().getDayOfYear(), LocalDate.now().getDayOfMonth()));
+        print(new MonthTable(LocalDate.now().getYear(), LocalDate.now().getMonthValue()));
     }
 
     protected abstract void setup();

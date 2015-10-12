@@ -25,4 +25,8 @@ public class Day {
     public int getDayOfWeek() {
         return dayOfWeek;
     }
+
+    public static boolean isWeekendDay(String shortName) {
+        return shortName.equals("Sat") || shortName.equals("Sun");
+    }
 }

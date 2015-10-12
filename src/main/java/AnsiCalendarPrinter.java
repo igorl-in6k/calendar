@@ -1,4 +1,5 @@
 import data.Day;
+import data.Week;
 
 import java.io.PrintStream;
 
@@ -18,6 +19,16 @@ public class AnsiCalendarPrinter extends CalendarPrinter {
     @Override
     protected void printTitle(String name, int year) {
         output.println("\t\t\t" + name + " " + year);
+        CalendarColor color;
+        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) {
+            if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
+                color = CalendarColor.WEEKEND_COLOR;
+            else
+                color = CalendarColor.HEADER_COLOR;
+            setColor(color);
+            output.printf("%4s", SHORT_NAME_WEEK_DAY);
+        }
+        output.println();
     }
 
     @Override

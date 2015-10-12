@@ -1,0 +1,31 @@
+body {
+    background-color: #DCDCDC;
+}
+
+td {
+    text-align: center;
+}
+
+table {
+    font-size: 25px;
+    width: 50%;
+}
+
+body {
+    font-size: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+    color:green;
+    opacity:0.3;
+    font-size:60px;
+    margin-left:25px;
+}
+
+table, td {
+   border: 2px solid black;
+   border-color: #CECECE;
+   border-collapse: collapse;
+}
