@@ -1,15 +1,23 @@
 package data;
 
+import java.time.LocalDate;
+
 public class Day {
 
-    private int dayOfWeek;
+    private int dayOfWeek; // todo
     private int dayOfMonth;
     private int weekIndex;
+    private LocalDate date;
 
     public Day(int dayOfMonth, int dayOfWeek, int weekIdx) {
         this.dayOfMonth = dayOfMonth;
         this.dayOfWeek = dayOfWeek;
         this.weekIndex = weekIdx;
+    }
+
+    public Day(LocalDate date) {
+        this(date.getDayOfMonth(), date.getDayOfWeek().getValue(), 0);
+        this.date = date;
     }
 
     public boolean isWeekend() {

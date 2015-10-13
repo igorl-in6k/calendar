@@ -2,19 +2,37 @@ import data.Day;
 import data.MonthTable;
 import data.Week;
 
+import java.io.PrintStream;
 import java.time.LocalDate;
 
 public abstract class CalendarPrinter {
 
     protected Day today;
+    PrintStream output;
 
     public CalendarPrinter() {
-        today = new Day(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfWeek().getValue(), 0);
+        this(System.out);
+    }
+
+    public CalendarPrinter(PrintStream output) {
+        this(output, LocalDate.now());
+    }
+
+    public CalendarPrinter(PrintStream output, LocalDate today) {
+        this.today = new Day(today);
+        this.output = output;
+    }
+
+    public void print() {
+        print(new MonthTable(LocalDate.now()));
     }
 
     public void print(MonthTable monthTable) {
         setup();
-        printTitle(monthTable.getName(), monthTable.getYear());
+        printTitle(monthTable);
+        startWeek();
+        printWeekdayTitles();
+        endWeek();
         for (Week week : monthTable.getWeeks()) {
             startWeek();
             for (Day day : week.getDays()) {
@@ -25,13 +43,9 @@ public abstract class CalendarPrinter {
         finish();
     }
 
-    public void print() {
-        print(new MonthTable(LocalDate.now().getYear(), LocalDate.now().getMonthValue()));
-    }
+    protected abstract void printTitle(MonthTable monthTable);
 
     protected abstract void setup();
-
-    protected abstract void printTitle(String name, int year);
 
     protected abstract void startWeek();
 
@@ -40,4 +54,29 @@ public abstract class CalendarPrinter {
     protected abstract void endWeek();
 
     protected abstract void finish();
+
+    protected void printWeekdayTitles() {
+        CalendarColor color;
+        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) { // DayOfWeek
+            if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
+                color = CalendarColor.WEEKEND_COLOR;
+            else
+                color = CalendarColor.HEADER_COLOR;
+            printWeekdayTitle(SHORT_NAME_WEEK_DAY, color);
+        }
+    }
+
+    protected abstract void printWeekdayTitle(String weekdayTitle, CalendarColor color);
+
+    protected CalendarColor getDayColor(Day day, MonthTable currentMonth) {
+        CalendarColor color = CalendarColor.CURRENT_MONTH_DAYS_COLOR;
+        if (day.isWeekend())
+            color = CalendarColor.WEEKEND_COLOR;
+        if (today.equalWith(day))
+            color = CalendarColor.CURRENT_DAY_COLOR;
+        if (!currentMonth.isInMonth(day))
+            color = CalendarColor.OTHER_MONTH_DAYS_COLOR;
+
+        return color;
+    }
 }

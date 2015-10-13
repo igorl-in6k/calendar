@@ -13,10 +13,6 @@ public class MonthTable {
     private int monthLength;
     private int year;
 
-    public MonthTable() {
-        this(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-    }
-
     public MonthTable(int y, int mIndex) {
         monthIndex = mIndex;
         year = y;
@@ -38,6 +34,10 @@ public class MonthTable {
             weeks[weekIdx] = new Week(lastFilledDay + 1, monthLength, weekIdx + 1);
             lastFilledDay = weeks[weekIdx].getDays()[6].getDayOfMonth();
         }
+    }
+
+    public MonthTable(LocalDate now) {
+        this(now.getYear(), now.getMonth().getValue());
     }
 
     public Week[] getWeeks() {

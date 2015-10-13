@@ -29,3 +29,8 @@ table, td {
    border-color: #CECECE;
    border-collapse: collapse;
 }
+
+.today {
+    color: black;
+    background-color: green;
+}

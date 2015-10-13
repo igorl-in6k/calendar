@@ -2,15 +2,7 @@ import data.Day;
 import data.MonthTable;
 import data.Week;
 
-import java.io.PrintStream;
-
 public class AnsiCalendarPrinter extends CalendarPrinter {
-
-    PrintStream output;
-
-    public AnsiCalendarPrinter() {
-        output = new PrintStream(System.out);
-    }
 
     @Override
     protected void setup() {
@@ -18,28 +10,13 @@ public class AnsiCalendarPrinter extends CalendarPrinter {
     }
 
     @Override
-    protected void printTitle(String name, int year) {
-        output.println("\t\t\t" + name + " " + year);
-        CalendarColor color;
-        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) {
-            if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
-                color = CalendarColor.WEEKEND_COLOR;
-            else
-                color = CalendarColor.HEADER_COLOR;
-            setColor(color);
-            output.printf("%4s", SHORT_NAME_WEEK_DAY);
-        }
-        output.println();
-    }
-
-    @Override
     protected void startWeek() {
-
     }
 
     @Override
     protected void printDay(Day day, MonthTable currentMonth) {
-        setAppropriateColor(day, currentMonth);
+        CalendarColor color = getDayColor(day, currentMonth);
+        setColor(color);
         output.printf("%4d", day.getDayOfMonth());
     }
 
@@ -54,18 +31,18 @@ public class AnsiCalendarPrinter extends CalendarPrinter {
         output.println("************************************");
     }
 
-    private void setAppropriateColor(Day day, MonthTable currentMonth) {
-        CalendarColor result = CalendarColor.CURRENT_MONTH_DAYS_COLOR;
-        if (day.isWeekend())
-            result = CalendarColor.WEEKEND_COLOR;
-        if (today.equalWith(day))
-            result = CalendarColor.CURRENT_DAY_COLOR;
-        if (!currentMonth.isInMonth(day))
-            result = CalendarColor.OTHER_MONTH_DAYS_COLOR;
-        setColor(result);
-    }
-
     private void setColor(CalendarColor color) {
         output.print(color.consoleValue);
+    }
+
+    @Override
+    protected void printTitle(MonthTable monthTable) {
+        output.println("\t\t\t" + monthTable.getName() + " " + monthTable.getYear()); // todo printf
+    }
+
+    @Override
+    protected void printWeekdayTitle(String weekdayTitle, CalendarColor color) {
+        setColor(color);
+        output.printf("%4s", weekdayTitle);
     }
 }
