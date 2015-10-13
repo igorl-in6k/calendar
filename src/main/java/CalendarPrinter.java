@@ -3,6 +3,7 @@ import data.MonthTable;
 import data.Week;
 
 import java.io.PrintStream;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public abstract class CalendarPrinter {
@@ -44,25 +45,20 @@ public abstract class CalendarPrinter {
     }
 
     protected abstract void printTitle(MonthTable monthTable);
-
     protected abstract void setup();
-
     protected abstract void startWeek();
-
     protected abstract void printDay(Day day, MonthTable currentMonth);
-
     protected abstract void endWeek();
-
     protected abstract void finish();
 
     protected void printWeekdayTitles() {
         CalendarColor color;
-        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) { // todo DayOfWeek
-            if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
+        for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            if ( Day.isWeekendDay(dayOfWeek) )
                 color = CalendarColor.WEEKEND_COLOR;
             else
                 color = CalendarColor.HEADER_COLOR;
-            printWeekdayTitle(SHORT_NAME_WEEK_DAY, color);
+            printWeekdayTitle(dayOfWeek.toString().substring(0, 3), color);
         }
     }
 

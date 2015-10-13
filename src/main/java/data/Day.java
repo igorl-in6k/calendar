@@ -1,5 +1,6 @@
 package data;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class Day {
@@ -42,5 +43,9 @@ public class Day {
 
     public static boolean isWeekendDay(String shortName) {
         return shortName.equals("Sat") || shortName.equals("Sun");
+    }
+
+    public static boolean isWeekendDay(DayOfWeek dayOfWeek) {
+        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
 }
