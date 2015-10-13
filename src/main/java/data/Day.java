@@ -6,11 +6,6 @@ public class Day {
     private int dayOfMonth;
     private int weekIndex;
 
-//    public Day(int dayOfMonth, int dayOfWeek) {
-//        this.dayOfMonth = dayOfMonth;
-//        this.dayOfWeek = dayOfWeek;
-//    }
-
     public Day(int dayOfMonth, int dayOfWeek, int weekIdx) {
         this.dayOfMonth = dayOfMonth;
         this.dayOfWeek = dayOfWeek;

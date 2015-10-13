@@ -1,4 +1,5 @@
 import data.Day;
+import data.MonthTable;
 import data.Week;
 
 import java.io.File;
@@ -40,8 +41,8 @@ public class HtmlCalendarPrinter extends CalendarPrinter {
     }
 
     @Override
-    protected void printDay(Day day) {
-        String style = "color:" + getColor(day).htmlValue;
+    protected void printDay(Day day, MonthTable currentMonth) {
+        String style = "color:" + getColor(day, currentMonth).htmlValue;
         if ( today.equalWith(day) )
             style += "; background-color: " + CalendarColor.CURRENT_DAY_BACKGROUND_COLOR.htmlValue;
         output.printf("\t\t\t<td style=\"%s\"> %d </td>\n", style, day.getDayOfMonth());
@@ -58,7 +59,7 @@ public class HtmlCalendarPrinter extends CalendarPrinter {
         output.close();
     }
 
-    private CalendarColor getColor(Day day) {
+    private CalendarColor getColor(Day day, MonthTable currentMonth) {
         CalendarColor result = CalendarColor.CURRENT_MONTH_DAYS_COLOR;
         if (day.isWeekend())
             result = CalendarColor.WEEKEND_COLOR;

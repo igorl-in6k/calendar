@@ -7,18 +7,18 @@ import java.time.LocalDate;
 public abstract class CalendarPrinter {
 
     protected Day today;
-    protected MonthTable currentMonth;
+
+    public CalendarPrinter() {
+        today = new Day(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfWeek().getValue(), 0);
+    }
 
     public void print(MonthTable monthTable) {
-        today = new Day(LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfWeek().getValue(), 0);
-        currentMonth = monthTable;
-
         setup();
         printTitle(monthTable.getName(), monthTable.getYear());
         for (Week week : monthTable.getWeeks()) {
             startWeek();
             for (Day day : week.getDays()) {
-                printDay(day);
+                printDay(day, monthTable);
             }
             endWeek();
         }
@@ -35,7 +35,7 @@ public abstract class CalendarPrinter {
 
     protected abstract void startWeek();
 
-    protected abstract void printDay(Day day);
+    protected abstract void printDay(Day day, MonthTable currentMonth);
 
     protected abstract void endWeek();
 

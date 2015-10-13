@@ -1,4 +1,5 @@
 import data.Day;
+import data.MonthTable;
 import data.Week;
 
 import java.io.PrintStream;
@@ -37,8 +38,8 @@ public class AnsiCalendarPrinter extends CalendarPrinter {
     }
 
     @Override
-    protected void printDay(Day day) {
-        setAppropriateColor(day);
+    protected void printDay(Day day, MonthTable currentMonth) {
+        setAppropriateColor(day, currentMonth);
         output.printf("%4d", day.getDayOfMonth());
     }
 
@@ -53,7 +54,7 @@ public class AnsiCalendarPrinter extends CalendarPrinter {
         output.println("************************************");
     }
 
-    private void setAppropriateColor(Day day) {
+    private void setAppropriateColor(Day day, MonthTable currentMonth) {
         CalendarColor result = CalendarColor.CURRENT_MONTH_DAYS_COLOR;
         if (day.isWeekend())
             result = CalendarColor.WEEKEND_COLOR;
