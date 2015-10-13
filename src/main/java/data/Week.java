@@ -8,14 +8,22 @@ public class Week {
 
     public Week(int from, int max, int weekIdx) {
         weekIndex = weekIdx;
-        for (int i = 1; i <= 7; i++) {
-            days[i-1] = new Day(from++, i, weekIndex);
+        for (int dayIdx = 1; dayIdx <= 7; dayIdx++) {
             if ( from > max )
                 from = 1;
+            days[dayIdx-1] = new Day(from++, dayIdx, weekIndex);
         }
     }
 
     public Day[] getDays() {
         return days;
+    }
+
+    public Day getFirstDay() {
+        return days[0];
+    }
+
+    public Day getLastDay() {
+        return days[6];
     }
 }
