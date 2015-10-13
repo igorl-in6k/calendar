@@ -34,9 +34,9 @@ public class MonthTable {
             weeks[0] = new Week(b, previousMonthLength, 1);
         }
         int lastFilledDay = weeks[0].getDays()[6].getDayOfMonth();
-        for (int i = 1; i < 6; i++) {
-            weeks[i] = new Week(lastFilledDay + 1, monthLength, i + 1);
-            lastFilledDay = weeks[i].getDays()[6].getDayOfMonth();
+        for (int weekIdx = 1; weekIdx < 6; weekIdx++) {
+            weeks[weekIdx] = new Week(lastFilledDay + 1, monthLength, weekIdx + 1);
+            lastFilledDay = weeks[weekIdx].getDays()[6].getDayOfMonth();
         }
     }
 
