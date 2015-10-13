@@ -23,10 +23,10 @@ public class HtmlCalendarPrinter extends CalendarPrinter {
     @Override
     protected void printDay(Day day, MonthTable currentMonth) { // todo use css classes
         CalendarColor color = getDayColor(day, currentMonth);
-        String style = "color:" + color.htmlValue;
+        String style = String.format("style=\"color:%s\"", color.htmlValue);
         if ( today.equalWith(day) )
-            style += "; background-color: " + CalendarColor.CURRENT_DAY_BACKGROUND_COLOR.htmlValue;
-        output.printf("\t\t\t<td style=\"%s\"> %d </td>\n", style, day.getDayOfMonth());
+            style = "id=\"today\"";
+        output.printf("\t\t\t<td %s> %d </td>\n", style, day.getDayOfMonth());
     }
 
     @Override

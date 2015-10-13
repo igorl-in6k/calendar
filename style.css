@@ -30,7 +30,7 @@ table, td {
    border-collapse: collapse;
 }
 
-.today {
+#today {
     color: black;
-    background-color: green;
+    background-color: #90EE90;
 }

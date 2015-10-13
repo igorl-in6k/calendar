@@ -57,7 +57,7 @@ public abstract class CalendarPrinter {
 
     protected void printWeekdayTitles() {
         CalendarColor color;
-        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) { // DayOfWeek
+        for (String SHORT_NAME_WEEK_DAY : Week.SHORT_NAMES_WEEK_DAYS) { // todo DayOfWeek
             if ( Day.isWeekendDay(SHORT_NAME_WEEK_DAY) )
                 color = CalendarColor.WEEKEND_COLOR;
             else

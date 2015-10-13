@@ -9,17 +9,14 @@ public class MonthTable {
     private Week[] weeks = new Week[6];
 
     private Month month;
-    private int monthIndex;
-    private int monthLength;
     private int year;
 
     public MonthTable(int y, int mIndex) {
-        monthIndex = mIndex;
         year = y;
-        month = Month.of(monthIndex);
-        monthLength = month.length(Year.isLeap(year));
+        month = Month.of(mIndex);
+        int monthLength = month.length(Year.isLeap(year));
 
-        int previousMonthLength = Month.of(monthIndex).minus(1).length(Year.isLeap(year));
+        int previousMonthLength = Month.of(mIndex).minus(1).length(Year.isLeap(year));
         int weekDayOfFirstDayInMonth = LocalDate.of(year, month.getValue(), 1).getDayOfWeek().getValue();
 
         if ( weekDayOfFirstDayInMonth == 1 )
